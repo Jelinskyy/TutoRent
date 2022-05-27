@@ -6,10 +6,19 @@
 
 body{
     background-color: #e1e1e1;
+    position: relative;
+    min-height: 100vh;
 }
 
 .course-grid{
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem 3rem;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    transform: translate(0, 100%);
+    width: 100%;
 }

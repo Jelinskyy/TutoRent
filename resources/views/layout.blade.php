@@ -18,13 +18,20 @@
     {{-- navbar --}}
     <nav class="navbar navbar-light bg-light justyfi-content-center shadow-sm">
         <div class="container">
-            <span class="navbar-brand mb-0 fs-2 fw-bold p-0">
-                <span class="text-danger">Tuto</span>Rent
-            </span>
+            <a href="{{route('courses.index')}}" class="btn p-0">
+                <span class="navbar-brand mb-0 fs-2 fw-bold p-0">
+                    <span class="text-danger">Tuto</span>Rent
+                </span>
+            </a>
 
-            <div class="d-flex ms-auto fs-3">
-                <i class="fa-solid fa-user-plus mx-3"></i>
-                <i class="fa-solid fa-arrow-right-to-bracket mx-3"></i>
+            <div class="d-flex ms-auto">
+                <a href="{{ route('register') }}" class="btn p-1 fs-3">
+                    <i class="fa-solid fa-user-plus mx-3"></i>
+                </a>
+
+                <a href="{{ route('login') }}" class="btn p-1 fs-3">
+                    <i class="fa-solid fa-arrow-right-to-bracket mx-3"></i>
+                </a>
             </div>
         </div>
     </nav>
