@@ -23,8 +23,16 @@
                     <span class="text-danger">Tuto</span>Rent
                 </span>
             </a>
-
             <div class="d-flex ms-auto">
+            @auth
+                <a href="#" class="btn p-1 fs-3">
+                    <i class="fa-solid fa-user mx-3"></i>
+                </a>
+
+                <a href="{{ route('logout') }}" class="btn p-1 fs-3">
+                    <i class="fa-solid fa-door-closed mx-3"></i>
+                </a>
+            @else
                 <a href="{{ route('register') }}" class="btn p-1 fs-3">
                     <i class="fa-solid fa-user-plus mx-3"></i>
                 </a>
@@ -32,11 +40,17 @@
                 <a href="{{ route('login') }}" class="btn p-1 fs-3">
                     <i class="fa-solid fa-arrow-right-to-bracket mx-3"></i>
                 </a>
-            </div>
+            @endauth
+        </div>
         </div>
     </nav>
 
     <main>
+        @if(session()->has('message'))
+            <div class="fixed-top w-100 bg-danger text-light text-center fs-5">
+                {{session('message')}}
+            </div>
+        @endif
         @yield('content')
     </main>
 

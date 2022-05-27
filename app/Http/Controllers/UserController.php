@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -11,7 +12,18 @@ class UserController extends Controller
     }
 
     public function authenticate(Request $request){
+        $formFields = $request->validate([
+            'email'=>['required', 'email'],
+            'password'=>['required']
+        ]);
+
+        if(auth()->attempt($formFields)) {
+            $request->session()->regenerate();
+
+            return redirect()->route('courses.index')->with('message', 'User Logged In!');
+        }
         
+        return back()->with('message', 'Wrong E-mail Or Password');
     }
 
     public function register(){
@@ -19,10 +31,25 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
+        $formFields = $request->validate([
+            'name' => 'required',
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed', 'min:6']
+        ]);
+
+        $formFields['password'] = bcrypt($formFields['password']);
         
+        $user = User::create($formFields);
+        auth()->login($user);
+
+        return redirect()->route('courses.index')->with('message', 'User Created Successfully');
     }
 
-    public function logout(){
+    public function logout(Request $request){
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         
+        return redirect()->route('courses.index')->with('message', 'User Logged Of');
     }
 }
