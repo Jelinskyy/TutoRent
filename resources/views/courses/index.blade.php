@@ -14,13 +14,25 @@
     {{-- Courses --}}
     <div class="mx-5 mb-3">
         <div class="container-fluid">
-            <x-card class="row d-flex justify-content-center">
-                <span class="fs-1 fw-bold w-auto"><span class="text-danger">Tuto</span>rials</span>
+            <x-card class="row px-5">
+                <div class="col-8">
+                    <span class="fs-1 fw-bold w-auto"><span class="text-danger">Tuto</span>rials</span>
+                </div>
+
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    <form action="{{ route('courses.index') }}" class="d-flex">
+                        <input class="form-control me-2" type="search" name="search" value="{{request('search')}}" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-danger" type="submit">Search</button>
+                    </form>
+                </div>
             </x-card>
             <div class="course-grid">
                 @foreach ($courses as $course)
                     <x-course-card :course="$course"/>
                 @endforeach
+            </div>
+            <div class="row d-flex justify-content-center">
+                {{ $courses->links() }}
             </div>
         </div>
     </div>

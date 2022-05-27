@@ -10,6 +10,15 @@ class Course extends Model
     protected $fillable = ['title', 'author', 'image', 'description', 'tags'];
 
     use HasFactory;
+    
+    public function scopeFilter($query, array $filters){
+        if($filters['tag'] ?? false) 
+            $query->where('tags', 'like', '%' . $filters['tag'] . '%');
+        if($filters['search'] ?? false) 
+            $query->where('title', 'like', '%' . $filters['search'] . '%')
+            ->orWhere('description', 'like', '%' . $filters['search'] . '%')
+            ->orWhere('tags', 'like', '%' . $filters['search'] . '%');
+    }
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
