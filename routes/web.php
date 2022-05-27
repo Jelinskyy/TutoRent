@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -14,6 +15,4 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('courses.index');
-})->name('courses.index');
+Route::get('/', [CourseController::class, 'index'])->name('courses.index');

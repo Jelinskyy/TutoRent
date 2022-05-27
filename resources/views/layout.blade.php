@@ -28,7 +28,15 @@
             </div>
         </div>
     </nav>
-    
-    @yield('content')
+
+    <main>
+        @yield('content')
+    </main>
+
+    <footer>
+        <x-card class="container-fluid mb-0">
+            Aleksander Jeliński &copy; 2022
+        </x-card>
+    </footer>
 </body>
 </html>
