@@ -29,10 +29,6 @@
                     <i class="fa-solid fa-file-circle-plus mx-3"></i>
                 </a>
 
-                <a href="#" class="btn p-1 fs-3">
-                    <i class="fa-solid fa-user mx-3"></i>
-                </a>
-
                 <a href="{{ route('logout') }}" class="btn p-1 fs-3">
                     <i class="fa-solid fa-door-closed mx-3"></i>
                 </a>

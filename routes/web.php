@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,13 @@ use App\Http\Controllers\UserController;
 |
 */
 
+// Users
+Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate')->middleware('guest');
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/register', [UserController::class, 'store'])->name('user.store')->middleware('guest');
+Route::get('/register', [UserController::class, 'register'])->name('register')->middleware('guest');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
+
 // Courses
 Route::get('/', [CourseController::class, 'index'])->name('courses.index');
 Route::get('/course/create', [CourseController::class, 'create'])->name('courses.create')->middleware('auth');
@@ -26,12 +34,9 @@ Route::put('/course/edit/{course}', [CourseController::class, 'update'])->name('
 Route::delete('/course/delete/{course}', [CourseController::class, 'delete'])->name('courses.delete')->middleware('can:update-course,course');
 Route::get('/course/{course}', [CourseController::class, 'show'])->name('courses.show');
 
-// Users
-Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate')->middleware('guest');
-Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
-Route::post('/register', [UserController::class, 'store'])->name('user.store')->middleware('guest');
-Route::get('/register', [UserController::class, 'register'])->name('register')->middleware('guest');
-Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
+// Sections
+Route::get('/section/create/{course}', [SectionController::class, 'create'])->name('sections.create')->middleware('can:update-course,course');
+Route::post('/section/create/{course}', [SectionController::class, 'store'])->name('sections.store')->middleware('can:update-course,course');
 
 // Rents
 Route::post('/rent/{course}', [RentController::class, 'store'])->name('rents.store')->middleware('auth');

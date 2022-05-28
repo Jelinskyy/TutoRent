@@ -55,6 +55,13 @@
                     </form>
                 </div>
             @endcannot
+            @can('update-course', $course)
+                <div class="row mt-3">
+                    <div class="col-12 d-flex justify-content-end">
+                        <a href="{{route('sections.create', ['course' => $course->id])}}" class="btn btn-danger mx-2">Add Section</a>
+                    </div>
+                </div>
+            @endcan
         @else
             <p class="text-center mt-3 mb-0 fs-5">
                 <a href="{{route('login')}}" class="link-danger">Log in</a> to rent a course.<br>
