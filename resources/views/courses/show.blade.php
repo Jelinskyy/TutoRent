@@ -3,7 +3,7 @@
 @section('content')
     <x-card class="container">
         <div class="row justify-content-center">
-            <img src="{{ $course->image ?? asset('img/no-image.png') }}" class="w-25">
+            <img src="{{ $course->image ? '/storage/'.$course->image : asset('img/no-image.png') }}" class="w-25">
         </div>
 
         <p class="h2 text-center">{{$course->title}}</p>

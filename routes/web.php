@@ -19,6 +19,8 @@ use App\Http\Controllers\UserController;
 
 // Courses
 Route::get('/', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/course/create', [CourseController::class, 'create'])->name('courses.create')->middleware('auth');
+Route::post('/course/create', [CourseController::class, 'store'])->name('courses.store')->middleware('auth');
 Route::get('/course/edit/{course}', [CourseController::class, 'edit'])->name('courses.edit')->middleware('can:update-course,course');
 Route::get('/course/{course}', [CourseController::class, 'show'])->name('courses.show');
 

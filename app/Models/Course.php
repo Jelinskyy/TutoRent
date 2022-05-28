@@ -17,6 +17,7 @@ class Course extends Model
         if($filters['search'] ?? false) 
             $query->where('title', 'like', '%' . $filters['search'] . '%')
             ->orWhere('description', 'like', '%' . $filters['search'] . '%')
+            ->orWhere('author', 'like', '%' . $filters['search'] . '%')
             ->orWhere('tags', 'like', '%' . $filters['search'] . '%');
     }
 

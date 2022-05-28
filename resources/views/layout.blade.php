@@ -25,6 +25,10 @@
             </a>
             <div class="d-flex ms-auto">
             @auth
+                <a href="{{ route('courses.create') }}" class="btn p-1 fs-3">
+                    <i class="fa-solid fa-file-circle-plus mx-3"></i>
+                </a>
+
                 <a href="#" class="btn p-1 fs-3">
                     <i class="fa-solid fa-user mx-3"></i>
                 </a>

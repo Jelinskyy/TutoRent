@@ -2,7 +2,7 @@
 
 <x-card class="row d-flex align-items-center">
     <div class="col-4">
-        <img src="{{ $course->image ?? asset('img/no-image.png') }}" class="w-100 rounded">
+        <img src="{{ $course->image ? '/storage/'.$course->image : asset('img/no-image.png') }}" class="w-100 rounded">
     </div>
     <div class="col-8 p-4">
         <h2>{{ $course->title }}</h2>
