@@ -14,7 +14,6 @@ class SectionFactory extends Factory
     public function definition()
     {
         return [
-            'type' => 'text',
             'title' => $this->faker->sentence(),
             'content' => $this->faker->paragraph(15),
         ];

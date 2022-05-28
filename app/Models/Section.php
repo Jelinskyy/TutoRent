@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
-    protected $fillable = ['type', 'title', 'content'];
+    protected $fillable = ['title', 'content'];
 
     use HasFactory;
 
