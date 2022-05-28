@@ -9,7 +9,11 @@ class CourseController extends Controller
 {
     public function index(){
         return view('courses.index', [
-            'courses' => Course::latest()->filter(request(['tag', 'search']))->paginate(6)
+            'courses' => Course::latest()->filter(request(['tag', 'search']))->paginate(10)
         ]);
+    }
+
+    public function show(Course $course){
+        return view('courses.show', ['course' => $course]);
     }
 }

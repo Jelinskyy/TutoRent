@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 // Courses
 Route::get('/', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/course/{course}', [CourseController::class, 'show'])->name('courses.show');
 
 // Users
 Route::post('/login', [App\Http\Controllers\UserController::class, 'authenticate'])->name('authenticate');

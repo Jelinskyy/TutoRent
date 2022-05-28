@@ -10,6 +10,6 @@
             <i class="fa-solid fa-user me-2"></i> {{$course->author}}
         </p>
         <x-course-tags :tagsCsv="$course->tags"/>
-        <a href="#" class="btn d-block ms-auto fs-5 border">Show more...</a>
+        <a href="{{route('courses.show', ['course' => $course->id])}}" class="btn d-block ms-auto fs-5 border">Show more...</a>
     </div>
 </x-card>
