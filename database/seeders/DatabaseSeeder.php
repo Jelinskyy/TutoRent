@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Course;
+use App\Models\Section;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +16,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->create();
+        User::factory(6)->create();
         
         foreach(User::all() as $user) 
-            \App\Models\Course::factory(2)->create([
+            Course::factory(2)->create([
                 'user_id' => $user->id
             ]);
-    }
+
+        foreach(Course::all() as $course) 
+            Section::factory(4)->create([
+                'course_id' => $course->id
+            ]);
+    }   
 }

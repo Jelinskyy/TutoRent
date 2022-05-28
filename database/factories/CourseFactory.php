@@ -18,7 +18,7 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'author' => $this->faker->name(),
-            'description' => $this->faker->paragraph(15),
+            'description' => $this->faker->paragraph(12),
             'tags' => "{$tags[array_rand($tags)]}, {$tags[array_rand($tags)]}, {$tags[array_rand($tags)]}"
         ];
     }
