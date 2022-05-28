@@ -18,28 +18,30 @@
 
         <hr class="my-4">
 
-        <x-course-sections :sections="$course->sections()->get()"/>
+        <x-course-sections :course="$course"/>
         
         @auth
-            <div class="col-12 d-flex justify-content-center mt-3">
-                <form action="{{route('rents.store', ['course'=>$course->id])}}" method="post">
-                    @csrf
-                    <input type="hidden" name="perioid" value="7">
-                    <button type="submit" class="btn btn-outline-danger p-4 mx-2">Rent for week</button>
-                </form>
+            @cannot('view-course', $course)
+                <div class="col-12 d-flex justify-content-center mt-3">
+                    <form action="{{route('rents.store', ['course'=>$course->id])}}" method="post">
+                        @csrf
+                        <input type="hidden" name="perioid" value="7">
+                        <button type="submit" class="btn btn-outline-danger p-4 mx-2">Rent for week</button>
+                    </form>
 
-                <form action="{{route('rents.store', ['course'=>$course->id])}}" method="post">
-                    @csrf
-                    <input type="hidden" name="perioid" value="30">
-                    <button type="submit" class="btn btn-outline-danger p-4 mx-2">Rent for month</button>
-                </form>
+                    <form action="{{route('rents.store', ['course'=>$course->id])}}" method="post">
+                        @csrf
+                        <input type="hidden" name="perioid" value="30">
+                        <button type="submit" class="btn btn-outline-danger p-4 mx-2">Rent for month</button>
+                    </form>
 
-                <form action="{{route('rents.store', ['course'=>$course->id])}}" method="post">
-                    @csrf
-                    <input type="hidden" name="perioid" value="90">
-                    <button type="submit" class="btn btn-outline-danger p-4 mx-2">Rent for 3 months</button>
-                </form>
-            </div>
+                    <form action="{{route('rents.store', ['course'=>$course->id])}}" method="post">
+                        @csrf
+                        <input type="hidden" name="perioid" value="90">
+                        <button type="submit" class="btn btn-outline-danger p-4 mx-2">Rent for 3 months</button>
+                    </form>
+                </div>
+            @endcannot
         @else
             <p class="text-center mt-3 mb-0 fs-5">
                 <a href="{{route('login')}}" class="link-danger">Log in</a> to rent a course.<br>

@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Rent;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class RentController extends Controller
 {
     public function store(Request $request, Course $course){
+        if(Gate::allows('view-course', $course)) abort(403);
+        
         $formFields = $request->validate([
             'perioid' => 'required|in:7,30,90'
         ]);
