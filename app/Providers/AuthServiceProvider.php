@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Section;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -41,6 +42,14 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->rents->where('course_id', $course->id)->filter(function ($value) {
                         return Carbon::create($value->expiration_date) >= Carbon::now();
                     })->isNotEmpty();
+        });
+
+        Gate::define('update-section', function (User $user, $section_id) {
+            if(is_string($section_id))
+                $section = Section::find($section_id);
+            else
+                $section = $section_id;
+            return Gate::forUser($user)->allows('update-course', $section->course);
         });
     }
 }

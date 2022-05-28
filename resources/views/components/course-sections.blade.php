@@ -12,6 +12,18 @@
                 <div id="section{{$k}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         {{$section->content}}
+                        @can('update-section', $section)
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-end pt-3">
+                                <a href="{{route('sections.edit', ['section' => $section])}}" class="btn btn-outline-danger mx-2">Edit</a>
+                                <form action="{{route('sections.delete', ['section' => $section])}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger mx-2" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                         @endcan
                     </div>
                 </div>
             </div>

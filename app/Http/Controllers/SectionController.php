@@ -25,4 +25,25 @@ class SectionController extends Controller
 
         return redirect()->route('courses.show', ['course' => $course->id])->with('message', 'Section Created Successfully');
     }
+
+    public function edit(Section $section){
+        return view('sections.edit', ['section' => $section]);
+    }
+
+    public function update(Request $request, Section $section){
+        $formFields = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        $section->update($formFields);
+
+        return redirect()->route('courses.show', ['course' => $section->course->id])->with('message', 'Section Updated Successfully');
+    }
+
+    public function delete(Section $section){
+        $section->delete();
+
+        return back()->with('message', 'Section Deleted Successfully');
+    }
 }

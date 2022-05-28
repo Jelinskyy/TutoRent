@@ -37,6 +37,9 @@ Route::get('/course/{course}', [CourseController::class, 'show'])->name('courses
 // Sections
 Route::get('/section/create/{course}', [SectionController::class, 'create'])->name('sections.create')->middleware('can:update-course,course');
 Route::post('/section/create/{course}', [SectionController::class, 'store'])->name('sections.store')->middleware('can:update-course,course');
+Route::get('/section/edit/{section}', [SectionController::class, 'edit'])->name('sections.edit')->middleware('can:update-section,section');
+Route::put('/section/edit/{section}', [SectionController::class, 'update'])->name('sections.update')->middleware('can:update-section,section');
+Route::delete('/section/delete/{section}', [SectionController::class, 'delete'])->name('sections.delete')->middleware('can:update-section,section');
 
 // Rents
 Route::post('/rent/{course}', [RentController::class, 'store'])->name('rents.store')->middleware('auth');
