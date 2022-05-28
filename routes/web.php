@@ -22,6 +22,8 @@ Route::get('/', [CourseController::class, 'index'])->name('courses.index');
 Route::get('/course/create', [CourseController::class, 'create'])->name('courses.create')->middleware('auth');
 Route::post('/course/create', [CourseController::class, 'store'])->name('courses.store')->middleware('auth');
 Route::get('/course/edit/{course}', [CourseController::class, 'edit'])->name('courses.edit')->middleware('can:update-course,course');
+Route::put('/course/edit/{course}', [CourseController::class, 'update'])->name('courses.update')->middleware('can:update-course,course');
+Route::delete('/course/delete/{course}', [CourseController::class, 'delete'])->name('courses.delete')->middleware('can:update-course,course');
 Route::get('/course/{course}', [CourseController::class, 'show'])->name('courses.show');
 
 // Users

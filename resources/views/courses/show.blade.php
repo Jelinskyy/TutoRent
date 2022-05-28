@@ -2,6 +2,19 @@
 
 @section('content')
     <x-card class="container">
+        @can('update-course', $course)
+            <div class="row">
+                <div class="col-12 d-flex justify-content-end">
+                    <a href="{{route('courses.edit', ['course' => $course->id])}}" class="btn btn-outline-danger mx-2">Edit</a>
+                    <form action="{{route('courses.delete', ['course' => $course->id])}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger mx-2" type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        @endcan
+
         <div class="row justify-content-center">
             <img src="{{ $course->image ? '/storage/'.$course->image : asset('img/no-image.png') }}" class="w-25">
         </div>

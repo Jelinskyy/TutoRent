@@ -39,10 +39,37 @@ class CourseController extends Controller
 
         $course = Course::create($formFields);
 
-        return redirect()->route('courses.show', ['course' => $course->id]);
+        return redirect()->route('courses.show', ['course' => $course->id])->with('message', 'Course Created Successfully');
     }
 
     public function edit(Course $course){
-        return view('courses.edit');
+        return view('courses.edit', ['course' => $course]);
+    }
+
+    public function update(Request $request, Course $course){
+        $formFields = $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'tags' => 'required',
+            'description' => 'required',
+            'image' => 'image'
+        ]);
+
+        if($request->file('image')){
+            Storage::disk('public')->delete($course->image);
+            $formFields['image'] = Storage::disk('public')->put('courses' , $request->file('image'));
+        }
+        else
+            unset($formFields['image']);
+
+        $course->update($formFields);
+
+        return redirect()->route('courses.show', ['course' => $course->id])->with('message', 'Course Updated Successfully');
+    }
+
+    public function delete(Course $course){
+        $course->delete();
+
+        return redirect()->route('courses.index')->with('message', 'Course Deleted Successfully');
     }
 }
