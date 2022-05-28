@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\RentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +22,11 @@ Route::get('/', [CourseController::class, 'index'])->name('courses.index');
 Route::get('/course/{course}', [CourseController::class, 'show'])->name('courses.show');
 
 // Users
-Route::post('/login', [App\Http\Controllers\UserController::class, 'authenticate'])->name('authenticate');
-Route::get('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login');
-Route::post('/register', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
-Route::get('/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
-Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout');
+Route::post('/login', [UserController::class, 'authenticate'])->name('authenticate')->middleware('guest');
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/register', [UserController::class, 'store'])->name('user.store')->middleware('guest');
+Route::get('/register', [UserController::class, 'register'])->name('register')->middleware('guest');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Rents
+Route::post('/rent/{course}', [RentController::class, 'store'])->name('rents.store')->middleware('auth');

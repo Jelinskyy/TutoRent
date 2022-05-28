@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    protected $fillable = ['title', 'author', 'image', 'description', 'tags'];
+    protected $fillable = ['title', 'author', 'image', 'description', 'tags', 'user_id'];
 
     use HasFactory;
     

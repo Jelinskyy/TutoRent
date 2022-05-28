@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rent extends Model
 {
-    protected $fillable = ['expiration_date'];
+    protected $fillable = ['expiration_date', 'user_id', 'course_id'];
 
     use HasFactory;
 

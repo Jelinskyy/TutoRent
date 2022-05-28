@@ -22,9 +22,23 @@
         
         @auth
             <div class="col-12 d-flex justify-content-center mt-3">
-                <a href="#" class="btn btn-outline-danger p-4 mx-2">Rent for week</a>
-                <a href="#" class="btn btn-outline-danger p-4 mx-2">Rent for month</a>
-                <a href="#" class="btn btn-outline-danger p-4 mx-2">Rent for 3 months</a>
+                <form action="{{route('rents.store', ['course'=>$course->id])}}" method="post">
+                    @csrf
+                    <input type="hidden" name="perioid" value="7">
+                    <button type="submit" class="btn btn-outline-danger p-4 mx-2">Rent for week</button>
+                </form>
+
+                <form action="{{route('rents.store', ['course'=>$course->id])}}" method="post">
+                    @csrf
+                    <input type="hidden" name="perioid" value="30">
+                    <button type="submit" class="btn btn-outline-danger p-4 mx-2">Rent for month</button>
+                </form>
+
+                <form action="{{route('rents.store', ['course'=>$course->id])}}" method="post">
+                    @csrf
+                    <input type="hidden" name="perioid" value="90">
+                    <button type="submit" class="btn btn-outline-danger p-4 mx-2">Rent for 3 months</button>
+                </form>
             </div>
         @else
             <p class="text-center mt-3 mb-0 fs-5">
