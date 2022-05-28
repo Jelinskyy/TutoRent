@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Models\User;
+use App\Models\Course;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +28,19 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('test', function (User $user, bool $bool) {
+            return $bool;
+        });
+
+        Gate::define('update-course', function (User $user, Course $course) {
+            return $user->id === $course->user_id;
+        });
+
+        Gate::define('view-course', function (User $user, Course $course) {
+            return Gate::forUser($user)->allows('update-course', $course) 
+                || $user->rents->where('course_id', $course->id)->filter(function ($value) {
+                        return Carbon::create($value->expiration_date) >= Carbon::now();
+                    })->isNotEmpty();
+        });
     }
 }

@@ -17,7 +17,7 @@ class CreateRentsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('course_id')->constrained();
-            $table->date('expiration_date');
+            $table->dateTime('expiration_date');
             $table->timestamps();
         });
     }
