@@ -27,4 +27,8 @@ class Course extends Model
     public function sections(){
         return $this->hasMany(Section::class, 'course_id');
     }
+
+    public function rents(){
+        return $this->hasMany(Rent::class, 'course_id');
+    }
 }

@@ -19,11 +19,18 @@
         <hr class="my-4">
 
         <x-course-sections :sections="$course->sections()->get()"/>
-
-        <div class="col-12 d-flex justify-content-center mt-3">
-            <a href="#" class="btn btn-outline-danger p-4 mx-2">Rent for week</a>
-            <a href="#" class="btn btn-outline-danger p-4 mx-2">Rent for month</a>
-            <a href="#" class="btn btn-outline-danger p-4 mx-2">Rent for 3 months</a>
-        </div>
+        
+        @auth
+            <div class="col-12 d-flex justify-content-center mt-3">
+                <a href="#" class="btn btn-outline-danger p-4 mx-2">Rent for week</a>
+                <a href="#" class="btn btn-outline-danger p-4 mx-2">Rent for month</a>
+                <a href="#" class="btn btn-outline-danger p-4 mx-2">Rent for 3 months</a>
+            </div>
+        @else
+            <p class="text-center mt-3 mb-0 fs-5">
+                <a href="{{route('login')}}" class="link-danger">Log in</a> to rent a course.<br>
+                Dont't have an account? <a href="{{route('register')}}" class="link-danger">Sign in</a>
+            </p>
+        @endauth
     </x-card>
 @endsection
