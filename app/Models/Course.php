@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class Course extends Model
 {
@@ -39,5 +40,19 @@ class Course extends Model
 
     public function rents(){
         return $this->hasMany(Rent::class, 'course_id');
+    }
+
+    /**
+     * Get number of course rents
+     * 
+     * @return int
+     */
+    public function getRentCountAttribute(){
+        $id = $this->id;
+        return cache()->remember('course_rents_'.$id, 300, function () use ($id){
+            return DB::table('rents')
+                ->where('course_id', '=', $id)
+                ->count();
+        });
     }
 }

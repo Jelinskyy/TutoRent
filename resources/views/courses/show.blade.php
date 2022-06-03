@@ -22,7 +22,8 @@
         <p class="h2 text-center">{{$course->title}}</p>
 
         <p class="fs-5 text-center">
-            <i class="fa-solid fa-user me-2"></i> {{$course->author}}
+            <i class="fa-solid fa-user me-2"></i> {{$course->author}}<br>
+            <i class="fa-solid fa-file-export me-2"></i> {{$course->rent_count}}
         </p>
         <x-course-tags class="d-flex d-flex justify-content-center" :tagsCsv="$course->tags"/>
         <p class="w-75 fs-5 mx-auto text-center">
