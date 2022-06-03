@@ -8,6 +8,7 @@ use App\Models\Section;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -39,9 +40,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('view-course', function (User $user, Course $course) {
             return Gate::forUser($user)->allows('update-course', $course) 
-                || $user->rents->where('course_id', $course->id)->filter(function ($value) {
-                        return Carbon::create($value->expiration_date) >= Carbon::now();
-                    })->isNotEmpty();
+                || DB::table('rents')
+                    ->where('user_id', '=', auth()->id())
+                    ->where('course_id', '=', $course->id)
+                    ->count() > 0;
         });
 
         Gate::define('update-section', function (User $user, $section_id) {
