@@ -42,4 +42,5 @@ Route::put('/section/edit/{section}', [SectionController::class, 'update'])->nam
 Route::delete('/section/delete/{section}', [SectionController::class, 'delete'])->name('sections.delete')->middleware('can:update-section,section');
 
 // Rents
+Route::get('/profile', [RentController::class, 'index'])->name('rents.index')->middleware('auth');
 Route::post('/rent/{course}', [RentController::class, 'store'])->name('rents.store')->middleware('auth');

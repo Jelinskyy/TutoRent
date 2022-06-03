@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class RentController extends Controller
 {
+    public function index(){
+        return View('rents.index', ['rents' => auth()->user()->rents]);
+    }
+
     public function store(Request $request, Course $course){
         if(Gate::allows('view-course', $course)) abort(403);
         
