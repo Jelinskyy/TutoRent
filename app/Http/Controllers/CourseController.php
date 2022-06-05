@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class CourseController extends Controller
 {
@@ -31,9 +32,10 @@ class CourseController extends Controller
             'image' => 'image'
         ]);
 
-        if($request->file('image'))
+        if($request->file('image')){
             $formFields['image'] = Storage::disk('public')->put('courses' , $request->file('image'));
-        else
+            $image = Image::make('storage/'.$formFields['image'])->resize(500, 500)->save();
+        } else
             unset($formFields['image']);
         $formFields['user_id'] = auth()->id();
 
